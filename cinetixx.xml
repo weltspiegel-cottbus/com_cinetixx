@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+
+    <name>Cinetixx</name>
+    <version>1.0.0</version>
+    <description>Joomla-Komponente zur Cinetixx Einbindung</description>
+    <author>Michael Buchholz</author>
+    <creationDate>November 2025</creationDate>
+    <license>MIT; see LICENSE</license>
+    <namespace path="src">Weltspiegel\Component\Cinetixx</namespace>
+
+    <administration>
+        <menu view="events">COM_CINETIXX</menu>
+        <files folder="administrator/components/com_cinetixx">
+            <folder>language</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+    </administration>
+
+</extension>
