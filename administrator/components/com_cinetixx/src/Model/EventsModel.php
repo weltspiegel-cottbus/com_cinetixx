@@ -10,8 +10,12 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
 
 \defined('_JEXEC') or die;
 
+use Exception;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\QueryInterface;
+use Weltspiegel\Component\Cinetixx\Administrator\Helper\CinetixxHelper;
 
 /**
  * Model class supporting a list of events
@@ -20,17 +24,65 @@ use Joomla\Database\QueryInterface;
 class EventsModel extends ListModel
 {
 	/**
+	 * Cinetixx Mandator ID
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	private string $mandatorId;
+
+	/**
+	 * Constructor
+	 *
+	 * @param   array                     $config
+	 * @param   MVCFactoryInterface|null  $factory
+	 *
+	 * @throws Exception
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct($config = [], ?MVCFactoryInterface $factory = null)
+	{
+		parent::__construct($config, $factory);
+
+		$params = ComponentHelper::getParams('com_cinetixx');
+		$this->mandatorId = $params->get('mandator_id');
+	}
+
+	/**
 	 * Method to get an array of events.
 	 *
 	 * @return array|false An array of events on success, false on failure.
 	 *
+	 * @throws Exception
 	 * @since 1.0.0
 	 */
 	public function getItems(): array|false
 	{
+		$events = CinetixxHelper::getEvents($this->mandatorId);
 		$items = parent::getItems();
-		// var_dump($items);
-		return $items;
+
+		return array_map(function ($event) use (&$items) {
+			$mergedItem = [
+				// Cinetixx event props
+				"cinetixxTitle" => $event->title,
+				"cinetixxTrailerId" => $event->trailerId,
+				// Database props
+				"id" => 0,
+				"event_id" => $event->eventId,
+				"trailer_url" => null,
+			];
+
+			$itemIx = array_search($event->eventId, array_column($items, 'event_id'));
+
+			if($itemIx !== false) {
+				$mergedItem["id"] = $items[$itemIx]->id;
+				$mergedItem["trailer_url"] = $items[$itemIx]->trailer_url;
+			}
+			return (object) $mergedItem;
+
+			}, $events);
 	}
 
 	/**
@@ -38,16 +90,21 @@ class EventsModel extends ListModel
 	 *
 	 * @return QueryInterface
 	 *
+	 * @throws Exception
+	 *
 	 * @since   1.0
 	 */
 	protected function getListQuery(): QueryInterface
 	{
+		$eventIds = CinetixxHelper::getEventIds($this->mandatorId);
+
 		$db    = $this->getDatabase();
 		$query = $db->createQuery();
 
 		$query
 			->select('id, event_id, trailer_url')
-			->from('#__ws_cinetixx_events');
+			->from('#__ws_cinetixx_events')
+			->where('event_id IN ('. implode(',', $eventIds) .')');
 
 		return $query;
 

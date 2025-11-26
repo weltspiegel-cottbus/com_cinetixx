@@ -27,6 +27,8 @@ abstract class YouTubeHelper
 
 	public static function parseYoutubeId($url): false|string
 	{
+		if(!$url) return false;
+
 		preg_match(self::YOUTUBE_REGEX, $url, $matches);
 		return $matches[1] ?? false;
 	}

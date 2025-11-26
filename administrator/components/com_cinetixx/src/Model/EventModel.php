@@ -31,9 +31,9 @@ class EventModel extends AdminModel
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
 	 * @return  Form|boolean  A form object on success, false on failure
+	 * @throws  Exception
 	 *
 	 * @since   1.0.0
-	 * @throws  Exception
 	 */
 	public function getForm($data = [], $loadData = true): false|Form
 	{
@@ -55,6 +55,7 @@ class EventModel extends AdminModel
 	 * @return false|array|stdClass
 	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	protected function loadFormData(): false|array|stdClass
@@ -68,5 +69,19 @@ class EventModel extends AdminModel
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  stdClass|false  Object on success, false on failure.
+	 *
+	 * @since   1.0.0
+	 */
+	public function getItem($pk = null): false|stdClass
+	{
+		return parent::getItem($pk);
 	}
 }
