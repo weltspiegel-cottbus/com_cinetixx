@@ -21,8 +21,9 @@
     </uninstall>
 
     <administration>
-        <menu view="events">COM_CINETIXX</menu>
+        <menu link="option=com_cinetixx">COM_CINETIXX</menu>
         <files folder="administrator/components/com_cinetixx">
+            <folder>forms</folder>
             <folder>language</folder>
             <folder>services</folder>
             <folder>sql</folder>
