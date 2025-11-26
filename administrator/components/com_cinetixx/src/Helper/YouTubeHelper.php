@@ -1,0 +1,38 @@
+<?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\Helper
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
+
+namespace Weltspiegel\Component\Cinetixx\Administrator\Helper;
+
+\defined('_JEXEC') or die;
+
+/**
+ * YouTube link helpers
+ *
+ * @since 1.0.0
+ */
+class YouTubeHelper
+{
+	/**
+	 * Regular expression to parse YouTube Urls for the YouTube video id
+	 * See: https://gist.github.com/afeld/1254889
+	 *
+	 * @since 1.0.0
+	 */
+	private const string YOUTUBE_REGEX = '#^(?:https?://|//)?(?:www\.|m\.|.+\.)?(?:youtu\.be/|youtube\.com/(?:embed/|v/|shorts/|feeds/api/videos/|watch\?v=|watch\?.+&v=))([\w-]{11})(?![\w-])#';
+
+	public static function parseYoutubeId($url): false|string
+	{
+		preg_match(self::YOUTUBE_REGEX, $url, $matches);
+		return $matches[1] ?? false;
+	}
+
+	public static function generateTrailerLink($youTubeId): string
+	{
+		return "https://www.youtube-nocookie.com/embed/$youTubeId";
+	}
+}
