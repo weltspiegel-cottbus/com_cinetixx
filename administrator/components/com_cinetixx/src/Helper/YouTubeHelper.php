@@ -15,7 +15,7 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\Helper;
  *
  * @since 1.0.0
  */
-class YouTubeHelper
+abstract class YouTubeHelper
 {
 	/**
 	 * Regular expression to parse YouTube Urls for the YouTube video id
