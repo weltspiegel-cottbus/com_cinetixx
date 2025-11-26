@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+            name="id"
+            type="number"
+            label="JGLOBAL_FIELD_ID_LABEL"
+            default="0"
+            class="readonly"
+            readonly="true"
+    />
+    <field
+            name="event_id"
+            type="text"
+            label="Event ID"
+            required="true"
+    />
+    <field
+            name="trailer_url"
+            type="text"
+            label="Trailer Link"
+    />
+</form>
