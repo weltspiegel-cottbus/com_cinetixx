@@ -5,10 +5,9 @@
 namespace ${NAMESPACE};
 
 #end
-
 \defined('_JEXEC') or die;
 
-#parse("PHP Class Doc Comment.php") 
+#parse("PHP Class Doc Comment.php")
 class ${NAME} {
 
 }
