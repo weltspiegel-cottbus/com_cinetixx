@@ -11,8 +11,11 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
 \defined('_JEXEC') or die;
 
 use Exception;
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Form\FormFactoryInterface;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\AdminModel;
 use stdClass;
 
@@ -23,7 +26,6 @@ use stdClass;
  */
 class EventModel extends AdminModel
 {
-
 	/**
 	 * Method to get the row form.
 	 *
@@ -66,22 +68,30 @@ class EventModel extends AdminModel
 		if (empty($data))
 		{
 			$data = $this->getItem();
+			if (empty($data->event_id)) {
+				$data->event_id = $app->getUserState("com_cinetixx.event_id");
+			}
 		}
 
 		return $data;
 	}
 
 	/**
-	 * Method to get a single record.
+	 * @param $data
 	 *
-	 * @param   integer  $pk  The id of the primary key.
+	 * @return bool
 	 *
-	 * @return  stdClass|false  Object on success, false on failure.
-	 *
-	 * @since   1.0.0
+	 * @throws Exception
+	 * @since version
 	 */
-	public function getItem($pk = null): false|stdClass
+	public function save($data)
 	{
-		return parent::getItem($pk);
+		// Need to do this manually, not sure why
+		$input      = Factory::getApplication()->getInput();
+		if(empty($data['id'])) {
+			$data['id'] = $input->getInt('id');
+		}
+
+		return parent::save($data);
 	}
 }

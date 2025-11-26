@@ -5,9 +5,11 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\View\Event;
 \defined('_JEXEC') or die;
 
 use Exception;
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Weltspiegel\Component\Cinetixx\Administrator\Helper\CinetixxHelper;
 use Weltspiegel\Component\Cinetixx\Administrator\Model\EventModel;
 
 /**
@@ -34,6 +36,13 @@ class HtmlView extends BaseHtmlView
 		$model      = $this->getModel();
 		$this->form = $model->getForm();
 		$this->item = $model->getItem();
+
+		$app  = Factory::getApplication();
+		$eventId = $app->getUserState("com_cinetixx.event_id");
+
+		$params = ComponentHelper::getParams('com_cinetixx');
+		$mandatorId = $params->get('mandator_id');
+		$this->cinetixxTitle = CinetixxHelper::getEvent($mandatorId, $eventId)->title;
 
 		$this->addToolbar();
 

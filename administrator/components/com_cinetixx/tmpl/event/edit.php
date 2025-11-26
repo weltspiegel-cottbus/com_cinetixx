@@ -10,12 +10,14 @@ $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive');
 $wa->useScript('form.validate');
 ?>
-<form action="<?php echo Route::_('index.php?option=com_cinetixx&layout=edit&id=' . (int) $this->item->id); ?>"
-      method="post" name="adminForm" id="item-form" class="form-validate">
+<p class="fs-3 my-3">Trailer für <span class="fst-italic fw-medium text-primary-emphasis"><?= $this->cinetixxTitle ?></span></p>
+<form
+        action="<?php echo Route::_('index.php?option=com_cinetixx&layout=edit&id=' . (int) $this->item->id); ?>"
+        method="post" name="adminForm" id="item-form" class="form-validate">
 
-	<?php echo $this->form->renderField('event_id'); ?>
-	<?php echo $this->form->renderField('trailer_url'); ?>
+    <?php echo $this->form->renderField('event_id'); ?>
+    <?php echo $this->form->renderField('trailer_id'); ?>
 
-	<input type="hidden" name="task" value="event.edit" />
+	<input type="hidden" name="task" value="" />
 	<?php echo HTMLHelper::_('form.token'); ?>
 </form>

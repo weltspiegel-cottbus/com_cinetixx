@@ -46,7 +46,7 @@ class EventsModel extends ListModel
 	{
 		parent::__construct($config, $factory);
 
-		$params = ComponentHelper::getParams('com_cinetixx');
+		$params           = ComponentHelper::getParams('com_cinetixx');
 		$this->mandatorId = $params->get('mandator_id');
 	}
 
@@ -61,28 +61,33 @@ class EventsModel extends ListModel
 	public function getItems(): array|false
 	{
 		$events = CinetixxHelper::getEvents($this->mandatorId);
-		$items = parent::getItems();
+		$items  = parent::getItems();
 
 		return array_map(function ($event) use (&$items) {
 			$mergedItem = [
 				// Cinetixx event props
-				"cinetixxTitle" => $event->title,
+				"cinetixxTitle"     => $event->title,
 				"cinetixxTrailerId" => $event->trailerId,
 				// Database props
-				"id" => 0,
-				"event_id" => $event->eventId,
-				"trailer_url" => null,
+				"id"                => 0,
+				"event_id"          => $event->eventId,
+				"trailer_id"        => null,
 			];
 
-			$itemIx = array_search($event->eventId, array_column($items, 'event_id'));
+			if ($items)
+			{
+				$itemIx = array_search($event->eventId, array_column($items, 'event_id'));
 
-			if($itemIx !== false) {
-				$mergedItem["id"] = $items[$itemIx]->id;
-				$mergedItem["trailer_url"] = $items[$itemIx]->trailer_url;
+				if ($itemIx !== false)
+				{
+					$mergedItem["id"]         = $items[$itemIx]->id;
+					$mergedItem["trailer_id"] = $items[$itemIx]->trailer_id;
+				}
 			}
+
 			return (object) $mergedItem;
 
-			}, $events);
+		}, $events);
 	}
 
 	/**
@@ -102,9 +107,10 @@ class EventsModel extends ListModel
 		$query = $db->createQuery();
 
 		$query
-			->select('id, event_id, trailer_url')
+			->select('id, event_id, trailer_id')
 			->from('#__ws_cinetixx_events')
-			->where('event_id IN ('. implode(',', $eventIds) .')');
+			->where('event_id IN (' . implode(',', $eventIds) . ')');
+
 
 		return $query;
 

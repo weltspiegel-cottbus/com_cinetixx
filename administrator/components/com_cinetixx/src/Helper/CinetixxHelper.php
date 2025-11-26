@@ -107,7 +107,7 @@ abstract class CinetixxHelper
 	}
 
 	/**
-	 * Returns (cached) Cinetixx events
+	 * Returns array of Cinetixx events
 	 *
 	 * @param   string  $mandatorId
 	 *
@@ -122,18 +122,35 @@ abstract class CinetixxHelper
 	}
 
 	/**
-	 * Returns array of current Cinetixx events
+	 * Returns Cinetixx event by id
+	 *
+	 * @param   string  $mandatorId
+	 * @param   string  $eventId
+	 *
+	 * @return stdClass|false
+	 *
+	 * @since 1.0.0
+	 */
+	public static function getEvent(string $mandatorId, string $eventId): stdClass|false
+	{
+		$events = static::getCache()->get([CinetixxHelper::class, "getCinetixxEvents"], [$mandatorId], 'cinetixx.events');
+		return $events[$eventId] ?? false;
+	}
+
+	/**
+	 * Returns array of Cinetixx event ids
 	 *
 	 * @param   string  $mandatorId
 	 *
 	 * @return array
 	 *
 	 * @throws Exception
-	 * @since version
+	 *
+	 * @since 1.0.0
 	 */
 	public static function getEventIds(string $mandatorId): array
 	{
-		$events = static::getEvents($mandatorId);
+		$events = static::getCache()->get([CinetixxHelper::class, "getCinetixxEvents"], [$mandatorId], 'cinetixx.events');
 		return array_keys($events);
 	}
 }
