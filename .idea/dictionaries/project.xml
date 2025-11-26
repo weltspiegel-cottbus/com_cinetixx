@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>hidemainmenu</w>
+      <w>jaction</w>
       <w>jexec</w>
       <w>jform</w>
       <w>jglobal</w>

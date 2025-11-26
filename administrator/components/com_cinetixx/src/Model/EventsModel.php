@@ -28,7 +28,9 @@ class EventsModel extends ListModel
 	 */
 	public function getItems(): array|false
 	{
-		return parent::getItems();
+		$items = parent::getItems();
+		// var_dump($items);
+		return $items;
 	}
 
 	/**
