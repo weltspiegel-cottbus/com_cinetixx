@@ -29,6 +29,7 @@
             <folder>sql</folder>
             <folder>src</folder>
             <folder>tmpl</folder>
+            <filename>config.xml</filename>
         </files>
     </administration>
 

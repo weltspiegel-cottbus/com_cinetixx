@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="cinetixx" label="Cinetixx">
+        <field name="mandator_id" type="text" default="" label="Mandator ID" />
+    </fieldset>
+</config>
