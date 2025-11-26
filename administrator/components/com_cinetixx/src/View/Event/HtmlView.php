@@ -51,5 +51,9 @@ class HtmlView extends BaseHtmlView
 		Factory::getApplication()->getInput()->set('hidemainmenu', true);
 
 		ToolbarHelper::title('Cinetixx Events: Bearbeiten', 'fa fa-film');
+
+		ToolbarHelper::apply('event.apply');
+		ToolbarHelper::save('event.save');
+		ToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
 	}
 }

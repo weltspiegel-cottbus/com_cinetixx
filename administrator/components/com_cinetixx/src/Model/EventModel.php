@@ -5,9 +5,16 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
 \defined('_JEXEC') or die;
 
 use Exception;
+use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
+use stdClass;
 
+/**
+ * Item Model for an Event.
+ *
+ * @since  1.0.0
+ */
 class EventModel extends AdminModel
 {
 
@@ -34,5 +41,26 @@ class EventModel extends AdminModel
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return false|stdClass
+	 *
+	 * @throws Exception
+	 * @since 1.0.0
+	 */
+	protected function loadFormData(): false|stdClass
+	{
+		$app  = Factory::getApplication();
+		$data = $app->getUserState('com_cinetixx.edit.event.data', []);
+
+		if (empty($data))
+		{
+			$data = $this->getItem();
+		}
+
+		return $data;
 	}
 }
