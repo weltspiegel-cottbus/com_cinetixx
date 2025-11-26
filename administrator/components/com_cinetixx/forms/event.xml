@@ -17,6 +17,6 @@
     <field
             name="trailer_url"
             type="text"
-            label="Trailer Link"
+            label="YouTube Link oder Video ID"
     />
 </form>

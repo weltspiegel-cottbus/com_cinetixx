@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\Model
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
 
@@ -46,12 +52,12 @@ class EventModel extends AdminModel
 	/**
 	 * Method to get the data that should be injected in the form.
 	 *
-	 * @return false|stdClass
+	 * @return false|array|stdClass
 	 *
 	 * @throws Exception
 	 * @since 1.0.0
 	 */
-	protected function loadFormData(): false|stdClass
+	protected function loadFormData(): false|array|stdClass
 	{
 		$app  = Factory::getApplication();
 		$data = $app->getUserState('com_cinetixx.edit.event.data', []);
