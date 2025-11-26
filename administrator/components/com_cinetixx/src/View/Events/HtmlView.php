@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\View\Events
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\View\Events;
 
@@ -7,6 +13,7 @@ defined('_JEXEC') or die;
 use Exception;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Weltspiegel\Component\Cinetixx\Administrator\Model\EventsModel;
 
 /**
  * View class for the list of current events.
@@ -15,6 +22,14 @@ use Joomla\CMS\Toolbar\ToolbarHelper;
  */
 class HtmlView extends BaseHtmlView
 {
+	/**
+	 * An array of events
+	 *
+	 * @var array
+	 *
+	 * @since 1.0.0
+	 */
+	protected array $items;
 
 	/**
 	 * Execute and display a template script.
@@ -26,6 +41,10 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
+		/** @var EventsModel $model */
+		$model = $this->getModel();
+		$this->items = $model->getItems();
+
 		if ($this->getLayout() !== 'modal') {
 			$this->addToolbar();
 		}
