@@ -13,6 +13,7 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\View\Events;
 use Exception;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\Registry\Registry;
 use Weltspiegel\Component\Cinetixx\Administrator\Model\EventsModel;
 
 /**
@@ -32,6 +33,15 @@ class HtmlView extends BaseHtmlView
 	protected array $items;
 
 	/**
+	 * The model state
+	 *
+	 * @var   Registry
+	 *
+	 * @since 1.0.0
+	 */
+	protected Registry $state;
+
+	/**
 	 * Execute and display a template script.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -44,6 +54,9 @@ class HtmlView extends BaseHtmlView
 		/** @var EventsModel $model */
 		$model = $this->getModel();
 		$this->items = $model->getItems();
+		$this->state = $model->getState();
+		$this->filterForm    = $model->getFilterForm();
+		$this->activeFilters = $model->getActiveFilters();
 
 		if (!\count($this->items)) {
 			$this->setLayout('empty');

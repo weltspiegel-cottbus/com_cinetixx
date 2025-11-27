@@ -45,6 +45,12 @@ class EventsModel extends ListModel
 	 */
 	public function __construct($config = [], ?MVCFactoryInterface $factory = null)
 	{
+		$config['filter_fields'] = array(
+			'event_id',
+			'title',
+		);
+
+		parent::__construct($config);
 		parent::__construct($config, $factory);
 
 		$params           = ComponentHelper::getParams('com_cinetixx');
@@ -64,7 +70,10 @@ class EventsModel extends ListModel
 		$events = CinetixxHelper::getEvents($this->mandatorId);
 		$items  = parent::getItems();
 
-		return array_map(function ($event) use (&$items) {
+		$orderCol = $this->state->get('list.ordering', 'id');
+		$orderDirection = $this->state->get('list.direction', 'desc');
+
+		$events = array_map(function ($event) use (&$items) {
 			$mergedItem = [
 				// Cinetixx event props
 				"cinetixxTitle"     => $event->title,
@@ -89,6 +98,14 @@ class EventsModel extends ListModel
 			return (object) $mergedItem;
 
 		}, $events);
+
+		if($orderCol === 'title') {
+			usort($events, function ($a, $b) use ($orderDirection) {
+				return ($a->cinetixxTitle <=> $b->cinetixxTitle) * ($orderDirection === 'ASC' ? 1 : -1);
+			});
+		}
+
+		return $events;
 	}
 
 	/**
