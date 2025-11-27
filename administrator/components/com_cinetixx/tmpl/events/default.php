@@ -12,7 +12,8 @@ $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirection = $this->escape($this->state->get('list.direction'));
 
 ?>
-<form action="<?= Route::_('index.php?option=com_cinetixx&view=events') ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?= Route::_('index.php?option=com_cinetixx&view=events') ?>" method="post" name="adminForm"
+      id="adminForm">
     <div id="j-main-container" class="j-main-container">
         <?= LayoutHelper::render('joomla.searchtools.default', ['view' => $this]) ?>
 
@@ -42,6 +43,41 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                                 Noch kein Trailer gesetzt
                             <?php endif; ?>
                         </a>
+                        <?php if ($item->trailer_id) : ?>
+                            <div class="small text-secondary-emphasis">
+                                <span>Link zum Trailer:
+                                <a href="https://youtu.be/<?= $item->trailer_id ?>"
+                                   title="Öffnet neuen Tab mit dem YouTube-Video"
+                                   class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0"
+                                   target="_blank">
+                                    youtu.be/<?= $item->trailer_id ?>
+                                </a>
+                                </span>
+                                <?php if ($item->cinetixxTrailerId) : ?>
+                                    <br/>
+                                    <span>(Cinetixx-Trailer:
+                                        <a href="https://youtu.be/<?= $item->cinetixxTrailerId ?>"
+                                           title="Öffnet neuen Tab mit dem YouTube-Video"
+                                           class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0"
+                                           target="_blank">
+                                            youtu.be/<?= $item->cinetixxTrailerId ?>
+                                        </a>
+                                    )
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        <?php elseif ($item->cinetixxTrailerId) : ?>
+                        <div class="small text-secondary-emphasis">
+                            <span>Cinetixx-Trailer:
+                                <a href="https://youtu.be/<?= $item->cinetixxTrailerId ?>"
+                                   title="Öffnet neuen Tab mit dem YouTube-Video"
+                                   class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0"
+                                   target="_blank">
+                                    youtu.be/<?= $item->cinetixxTrailerId ?>
+                                </a>
+                            </span>
+                        </div>
+                        <?php endif; ?>
                     </th>
                 </tr>
             <?php endforeach; ?>
