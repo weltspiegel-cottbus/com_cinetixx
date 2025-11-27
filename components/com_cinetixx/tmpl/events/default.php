@@ -1,0 +1,23 @@
+<?php
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Router\Route;
+
+?>
+<div>
+	<h1>Programm</h1>
+
+	<div class="d-flex flex-column gap-3">
+		<?php foreach ($this->items as $id => $event) : ?>
+
+			<?php
+			$detailRoute = Route::_('index.php?view=event&event_id=' . $id);
+			?>
+			<div>
+				<a class="h3" href="<?= $detailRoute ?>"><?= $event->cinetixxTitle ?></a>
+			</div>
+		<?php endforeach; ?>
+
+	</div>
+
+</div>

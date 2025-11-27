@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Cinetixx\Administrator\Model
+ * @package     Weltspiegel\Component\Cinetixx\Site\Model
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
+namespace Weltspiegel\Component\Cinetixx\Site\Model;
 
 \defined('_JEXEC') or die;
 
@@ -18,7 +18,7 @@ use Joomla\Database\QueryInterface;
 use Weltspiegel\Component\Cinetixx\Administrator\Helper\CinetixxHelper;
 
 /**
- * Model class supporting a list of events
+ * This models supports retrieving a list of events.
  *
  * @since 1.0.0
  */
@@ -45,11 +45,6 @@ class EventsModel extends ListModel
 	 */
 	public function __construct($config = [], ?MVCFactoryInterface $factory = null)
 	{
-		$config['filter_fields'] = array(
-			'event_id',
-			'title',
-		);
-
 		parent::__construct($config, $factory);
 
 		$params           = ComponentHelper::getParams('com_cinetixx');
@@ -69,10 +64,7 @@ class EventsModel extends ListModel
 		$events = CinetixxHelper::getEvents($this->mandatorId);
 		$items  = parent::getItems();
 
-		$orderCol = $this->state->get('list.ordering', 'id');
-		$orderDirection = $this->state->get('list.direction', 'desc');
-
-		$events = array_map(function ($event) use (&$items) {
+		return array_map(function ($event) use (&$items) {
 			$mergedItem = [
 				// Cinetixx event props
 				"cinetixxTitle"     => $event->title,
@@ -97,14 +89,6 @@ class EventsModel extends ListModel
 			return (object) $mergedItem;
 
 		}, $events);
-
-		if($orderCol === 'title') {
-			usort($events, function ($a, $b) use ($orderDirection) {
-				return ($a->cinetixxTitle <=> $b->cinetixxTitle) * ($orderDirection === 'ASC' ? 1 : -1);
-			});
-		}
-
-		return $events;
 	}
 
 	/**
@@ -112,9 +96,9 @@ class EventsModel extends ListModel
 	 *
 	 * @return QueryInterface
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 *
-	 * @since   1.0
+	 * @since 1.0.0
 	 */
 	protected function getListQuery(): QueryInterface
 	{

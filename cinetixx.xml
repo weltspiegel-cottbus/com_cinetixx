@@ -33,4 +33,8 @@
         </files>
     </administration>
 
+    <files folder="components/com_cinetixx">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
 </extension>
