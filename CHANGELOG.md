@@ -1,4 +1,16 @@
+## v0.1.1
 
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- Add empty state layout. ([e7e34bc](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/e7e34bc))
+- Make list view sortable. ([34db17a](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/34db17a))
+- Add trailer links to YouTube. ([69796df](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/69796df))
+
+### 🏡 Chore
+
+- Align component version with tags and later releases. ([083a327](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/083a327)
 
 ## v0.1.0
 
