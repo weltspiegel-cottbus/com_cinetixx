@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\View\Event
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\View\Event;
 
@@ -7,8 +13,10 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\View\Event;
 use Exception;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use stdClass;
 use Weltspiegel\Component\Cinetixx\Administrator\Helper\CinetixxHelper;
 use Weltspiegel\Component\Cinetixx\Administrator\Model\EventModel;
 
@@ -19,8 +27,21 @@ use Weltspiegel\Component\Cinetixx\Administrator\Model\EventModel;
  */
 class HtmlView extends BaseHtmlView
 {
-	protected $form;
-	protected $item;
+	/**
+	 * The form instance
+	 *
+	 * @var Form
+	 * @since 1.0.0
+	 */
+	protected Form $form;
+
+	/**
+	 * The event item
+	 *
+	 * @var stdClass
+	 * @since 1.0.0
+	 */
+	protected stdClass $item;
 
 	/**
 	 * Execute and display a template script.

@@ -25,6 +25,14 @@ abstract class YouTubeHelper
 	 */
 	private const string YOUTUBE_REGEX = '#^(?:https?://|//)?(?:www\.|m\.|.+\.)?(?:youtu\.be/|youtube\.com/(?:embed/|v/|shorts/|feeds/api/videos/|watch\?v=|watch\?.+&v=))([\w-]{11})(?![\w-])#';
 
+	/**
+	 * Parses a YouTube Video ID from a YouTube url
+	 * @param $url
+	 *
+	 * @return false|string
+	 *
+	 * @since 1.0.0
+	 */
 	public static function parseYoutubeId($url): false|string
 	{
 		if(!$url) return false;
@@ -33,6 +41,15 @@ abstract class YouTubeHelper
 		return $matches[1] ?? false;
 	}
 
+	/**
+	 * Generates a no-cookies YouTube url
+	 *
+	 * @param $youTubeId
+	 *
+	 * @return string
+	 *
+	 * @since 1.0.0
+	 */
 	public static function generateTrailerLink($youTubeId): string
 	{
 		return "https://www.youtube-nocookie.com/embed/$youTubeId";

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\Controller
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\Controller;
 

@@ -8,7 +8,7 @@
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\View\Events;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 use Exception;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;

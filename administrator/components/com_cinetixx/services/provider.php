@@ -1,4 +1,10 @@
 <?php
+/**
+ * Service Provider
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 \defined('_JEXEC') or die;
 

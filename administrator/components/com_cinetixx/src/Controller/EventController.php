@@ -1,10 +1,15 @@
 <?php
+/**
+ * @package     Weltspiegel\Component\Cinetixx\Administrator\Controller
+ *
+ * @copyright   Weltspiegel Cottbus
+ * @license     MIT; see LICENSE file
+ */
 
 namespace Weltspiegel\Component\Cinetixx\Administrator\Controller;
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\FormController;
 
 /**

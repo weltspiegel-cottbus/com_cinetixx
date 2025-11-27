@@ -11,11 +11,8 @@ namespace Weltspiegel\Component\Cinetixx\Administrator\Model;
 \defined('_JEXEC') or die;
 
 use Exception;
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
-use Joomla\CMS\Form\FormFactoryInterface;
-use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\AdminModel;
 use stdClass;
 
@@ -82,7 +79,8 @@ class EventModel extends AdminModel
 	 * @return bool
 	 *
 	 * @throws Exception
-	 * @since version
+	 *
+	 * @since 1.0.0
 	 */
 	public function save($data)
 	{

@@ -19,7 +19,8 @@ use Weltspiegel\Component\Cinetixx\Administrator\Helper\CinetixxHelper;
 
 /**
  * Model class supporting a list of events
- * @since version
+ *
+ * @since 1.0.0
  */
 class EventsModel extends ListModel
 {
