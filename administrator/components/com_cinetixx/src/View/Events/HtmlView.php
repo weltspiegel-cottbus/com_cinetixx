@@ -45,6 +45,10 @@ class HtmlView extends BaseHtmlView
 		$model = $this->getModel();
 		$this->items = $model->getItems();
 
+		if (!\count($this->items)) {
+			$this->setLayout('empty');
+		}
+
 		if ($this->getLayout() !== 'modal') {
 			$this->addToolbar();
 		}
