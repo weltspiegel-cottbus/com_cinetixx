@@ -1,3 +1,16 @@
+## v0.2.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.1.1...main)
+
+### 🚀 Enhancements
+
+- Display current event list on frontend. ([bbd4e47](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/bbd4e47))
+- Display single event on site. ([c1c8f9e](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/c1c8f9e))
+
+### 💅 Refactors
+
+- Simplify code and align with single event code. ([fab923c](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/fab923c))
+
 ## v0.1.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.1.0...v0.1.1)
