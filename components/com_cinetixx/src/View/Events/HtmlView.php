@@ -23,6 +23,15 @@ class HtmlView extends BaseHtmlView
 {
 
 	/**
+	 * The list of current events
+	 *
+	 * @var array
+	 *
+	 * @since 1.0.0
+	 */
+	protected array $items;
+
+	/**
 	 * Execute and display a template script.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.

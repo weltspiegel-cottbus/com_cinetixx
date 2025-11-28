@@ -64,31 +64,15 @@ class EventsModel extends ListModel
 		$events = CinetixxHelper::getEvents($this->mandatorId);
 		$items  = parent::getItems();
 
-		return array_map(function ($event) use (&$items) {
-			$mergedItem = [
-				// Cinetixx event props
-				"cinetixxTitle"     => $event->title,
-				"cinetixxTrailerId" => $event->trailerId,
-				// Database props
-				"id"                => 0,
-				"event_id"          => $event->eventId,
-				"trailer_id"        => null,
-			];
-
-			if ($items)
-			{
-				$itemIx = array_search($event->eventId, array_column($items, 'event_id'));
-
-				if ($itemIx !== false)
-				{
-					$mergedItem["id"]         = $items[$itemIx]->id;
-					$mergedItem["trailer_id"] = $items[$itemIx]->trailer_id;
+		if ($items) {
+			foreach ($items as $item) {
+				if(!empty($item->trailer_id)) {
+					$events[$item->event_id]->trailerId = $item->trailer_id;
 				}
 			}
+		}
 
-			return (object) $mergedItem;
-
-		}, $events);
+		return $events;
 	}
 
 	/**

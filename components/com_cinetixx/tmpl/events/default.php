@@ -11,10 +11,10 @@ use Joomla\CMS\Router\Route;
 		<?php foreach ($this->items as $id => $event) : ?>
 
 			<?php
-			$detailRoute = Route::_('index.php?view=event&event_id=' . $id);
+			$detailRoute = Route::_('index.php?option=com_cinetixx&view=event&event_id=' . $id);
 			?>
 			<div>
-				<a class="h3" href="<?= $detailRoute ?>"><?= $event->cinetixxTitle ?></a>
+				<a class="h3" href="<?= $detailRoute ?>"><?= $event->title ?></a>
 			</div>
 		<?php endforeach; ?>
 
