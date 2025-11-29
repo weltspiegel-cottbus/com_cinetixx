@@ -3,10 +3,13 @@
 
     <name>Cinetixx</name>
     <version>0.2.0</version>
-    <description>Joomla-Komponente zur Cinetixx Einbindung</description>
-    <author>Michael Buchholz</author>
     <creationDate>November 2025</creationDate>
+    <author>Michael Buchholz</author>
+    <authorEmail>mail@lean-stack.rocks</authorEmail>
+    <copyright>Weltspiegel Cottbus</copyright>
     <license>MIT; see LICENSE</license>
+    <description>Joomla-Komponente zur Cinetixx Einbindung</description>
+
     <namespace path="src">Weltspiegel\Component\Cinetixx</namespace>
 
     <install>
