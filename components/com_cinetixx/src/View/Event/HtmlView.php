@@ -11,6 +11,8 @@ namespace Weltspiegel\Component\Cinetixx\Site\View\Event;
 \defined('_JEXEC') or die;
 
 use Exception;
+use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use stdClass;
 use Weltspiegel\Component\Cinetixx\Site\Model\EventModel;
@@ -41,6 +43,14 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
+		/** @var CMSApplication $app */
+		$app = Factory::getApplication();
+		$menu = $app->getMenu();
+
+		// Questionable: does this always return the "Programm" top link?
+		$topMenuItem = $menu->getItems('component', 'com_cinetixx', true);
+		$menu->setActive($topMenuItem->id);
+
 		/** @var EventModel $model */
 		$model = $this->getModel();
 		$this->item = $model->getItem();
