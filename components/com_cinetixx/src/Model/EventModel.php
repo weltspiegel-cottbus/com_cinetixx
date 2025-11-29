@@ -39,24 +39,24 @@ class EventModel extends ItemModel
 	{
 		$eventId = Factory::getApplication()->input->getInt('event_id');
 
-		$params           = ComponentHelper::getParams('com_cinetixx');
+		$params     = ComponentHelper::getParams('com_cinetixx');
 		$mandatorId = $params->get('mandator_id');
 
 		$event = CinetixxHelper::getEvent($mandatorId, $eventId);
 
-		$db = $this->getDatabase();
+		$db    = $this->getDatabase();
 		$query = $db->getQuery(true);
 
 		$query->select('*')
 			->from($db->quoteName('#__ws_cinetixx_events', 'a'))
-			->where(
-					$db->quoteName('a.event_id') . ' = ' . $db->quote($eventId)
-			);
+			->where($db->quoteName('a.event_id') . ' = :event_id')
+			->bind(':event_id', $eventId);
 
 		$db->setQuery($query);
 
 		$item = $db->loadObject();
-		if(!empty($item) && !empty($item->trailer_id)) {
+		if (!empty($item) && !empty($item->trailer_id))
+		{
 			$event->trailerId = $item->trailer_id;
 		}
 

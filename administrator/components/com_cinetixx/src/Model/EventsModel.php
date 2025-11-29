@@ -126,7 +126,7 @@ class EventsModel extends ListModel
 		$query
 			->select('id, event_id, trailer_id')
 			->from('#__ws_cinetixx_events')
-			->where('event_id IN (' . implode(',', $eventIds) . ')');
+			->whereIn('event_id', $eventIds);
 
 		return $query;
 	}
