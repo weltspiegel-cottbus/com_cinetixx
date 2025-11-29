@@ -1,6 +1,23 @@
+## v0.2.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.0...v0.2.1)
+
+### 🩹 Fixes
+
+- Set active menu item to parent events view. ([b50bd39](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/b50bd39))
+
+### 💅 Refactors
+
+- Provide route config for the event view. ([c02aece](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/c02aece))
+- Use prepared statements. ([8996517](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/8996517))
+
+### 🏡 Chore
+
+- Update copyright. ([15057fb](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/15057fb))
+- Prepare project for automatic updates. ([a32a009](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/a32a009))
 ## v0.2.0
 
-[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.1.1...main)
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.1.1...v0.2.0)
 
 ### 🚀 Enhancements
 
