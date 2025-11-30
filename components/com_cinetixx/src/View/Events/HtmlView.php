@@ -21,6 +21,14 @@ use Weltspiegel\Component\Cinetixx\Site\Model\EventsModel;
  */
 class HtmlView extends BaseHtmlView
 {
+	/**
+	 * Page title, will be used in browser title and page.
+	 * Overrides menu item settings
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	protected string $title;
 
 	/**
 	 * The list of current events
@@ -44,6 +52,9 @@ class HtmlView extends BaseHtmlView
 		/** @var EventsModel $model */
 		$model = $this->getModel();
 		$this->items = $model->getItems();
+
+		$this->title = 'Programmübersicht';
+		$this->setDocumentTitle($this->title);
 
 		parent::display($tpl);
 	}

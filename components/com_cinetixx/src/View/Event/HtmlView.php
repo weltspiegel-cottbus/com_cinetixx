@@ -26,6 +26,15 @@ use Weltspiegel\Component\Cinetixx\Site\Model\EventModel;
 class HtmlView extends BaseHtmlView
 {
 	/**
+	 * Page title, will be used in browser title and page.
+	 * Overrides menu item settings
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	protected string $title;
+
+	/**
 	 * The single event
 	 *
 	 * @var stdClass
@@ -54,6 +63,9 @@ class HtmlView extends BaseHtmlView
 		/** @var EventModel $model */
 		$model = $this->getModel();
 		$this->item = $model->getItem();
+
+		$this->title = $this->item->title;
+		$this->setDocumentTitle($this->title);
 
 		parent::display($tpl);
 	}

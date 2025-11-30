@@ -7,7 +7,7 @@ use Weltspiegel\Component\Cinetixx\Administrator\Helper\YouTubeHelper;
 $event = $this->item;
 
 ?>
-<h1><?= $event->title ?></h1>
+<h1><?= $this->title ?></h1>
 
 <?php if (!empty($event->trailerId)): ?>
     <div>

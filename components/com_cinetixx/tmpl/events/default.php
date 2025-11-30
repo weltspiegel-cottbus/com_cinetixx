@@ -5,7 +5,7 @@ use Joomla\CMS\Router\Route;
 
 ?>
 <div>
-	<h1>Programm</h1>
+	<h1><?php echo $this->escape($this->title); ?></h1>
 
 	<div class="d-flex flex-column gap-3">
 		<?php foreach ($this->items as $id => $event) : ?>
