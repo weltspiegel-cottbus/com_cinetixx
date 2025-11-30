@@ -2,7 +2,7 @@
 <extension type="component" method="upgrade">
 
     <name>Cinetixx</name>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <creationDate>November 2025</creationDate>
     <author>Michael Buchholz</author>
     <authorEmail>mail@lean-stack.rocks</authorEmail>
@@ -40,6 +40,8 @@
         <folder>src</folder>
         <folder>tmpl</folder>
     </files>
+
+    <changelogurl>https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/changelog.xml</changelogurl>
 
     <updateservers>
         <server type="extension" priority="1" name="Cinetixx Component Updates">https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/updates.xml</server>
