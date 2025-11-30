@@ -1,3 +1,11 @@
+## v0.2.3
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.2...v0.2.3)
+
+### 🏡 Chore
+
+- Prepare release. ([5ab17b7](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/5ab17b7))
+
 ## v0.2.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.1...v0.2.2)
