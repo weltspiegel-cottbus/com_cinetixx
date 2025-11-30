@@ -1,3 +1,16 @@
+## v0.2.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.1...v0.2.2)
+
+### 🩹 Fixes
+
+- Set browser title in component views. ([61d3786](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/61d3786))
+
+### 🏡 Chore
+
+- Add package.json to simplify release via changelogen. ([33fbad6](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/33fbad6))
+- Prepare release. ([b6b24bf](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/b6b24bf))
+
 ## v0.2.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.0...v0.2.1)

@@ -1,6 +1,6 @@
 {
   "name": "com_cinetixx",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Joomla-Komponente zur Cinetixx API-Anbindung",
   "license": "MIT",
   "repository": {
