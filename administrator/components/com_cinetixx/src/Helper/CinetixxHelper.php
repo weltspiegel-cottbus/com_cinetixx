@@ -69,38 +69,56 @@ abstract class CinetixxHelper
 	 */
 	public static function getCinetixxEvents($mandatorId): array
 	{
-		$url = static::svcUrl . "?mandatorId=$mandatorId";
-		$http = new Http();
+		$url      = static::svcUrl . "?mandatorId=$mandatorId";
+		$http     = new Http();
 		$response = $http->get($url);
 
 		$xml = simplexml_load_string($response->getBody());
 
 		$eventIds = []; // Collecting unique event ids
-		$events = [];   // Mapped events
+		$events   = [];   // Mapped events
 
-		foreach ($xml->Show as $show) {
+		foreach ($xml->Show as $show)
+		{
 
 			$eventId = (string) $show->EVENT_ID;
-			$event = null;
+			$event   = null;
 
 			if (!in_array($eventId, $eventIds))
 			{
 				$eventIds[] = $eventId;
-				$event = new stdClass();
+				$event      = new stdClass();
 
 				$event->eventId = $eventId;
-				$event->title = (string) $show->VERANSTALTUNGSTITEL;
+				$event->title   = (string) $show->VERANSTALTUNGSTITEL;
 
-				$event->trailerUrl = trim($show->MOVIE_LINK) ?: false;
-				$event->trailerId = YouTubeHelper::parseYoutubeId($event->trailerUrl);
+				$event->text      = trim($show->TEXT);
+				$event->textShort = trim($show->TEXT_SHORT);
+
+				$event->genre         = (string) $show->GENRE;
+				$event->duration      = (string) $show->SPIELDAUER_EVENT;
+				$event->fsk           = (string) $show->ALTERSFREIGABE;
+				$event->languageShort = (string) $show->SPRACHVERSION;
+				$event->language      = (string) $show->LANGUAGE;
+				$event->is3D          = (string) $show->FLAG_3D === 'true';
+
+				$event->poster    = (string) $show->ARTWORK;
+				$event->posterBig = (string) $show->ARTWORK_BIG;
+				$event->image[]   = (string) $show->IMAGE_1;
+				$event->image[]   = (string) $show->IMAGE_2;
+				$event->image[]   = (string) $show->IMAGE_3;
+
+				$event->trailerUrl = trim($show->EVENT_TRAILER) ?: false;
+				$event->trailerId  = YouTubeHelper::parseYoutubeId($event->trailerUrl);
 
 				$events[$eventId] = $event;
 			}
 		}
 
 		$app = Factory::getApplication();
-		if ($app->isClient("administrator")) {
-			$app->enqueueMessage( "Aktuelle Cinetixx-Daten wurden geladen.");
+		if ($app->isClient("administrator"))
+		{
+			$app->enqueueMessage("Aktuelle Cinetixx-Daten wurden geladen.");
 		}
 
 		return $events;
@@ -134,6 +152,7 @@ abstract class CinetixxHelper
 	public static function getEvent(string $mandatorId, string $eventId): stdClass|false
 	{
 		$events = static::getCache()->get([CinetixxHelper::class, "getCinetixxEvents"], [$mandatorId], 'cinetixx.events');
+
 		return $events[$eventId] ?? false;
 	}
 
@@ -151,6 +170,7 @@ abstract class CinetixxHelper
 	public static function getEventIds(string $mandatorId): array
 	{
 		$events = static::getCache()->get([CinetixxHelper::class, "getCinetixxEvents"], [$mandatorId], 'cinetixx.events');
+
 		return array_keys($events);
 	}
 }
