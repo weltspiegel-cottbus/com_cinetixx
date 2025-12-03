@@ -104,9 +104,9 @@ abstract class CinetixxHelper
 
 				$event->poster    = (string) $show->ARTWORK;
 				$event->posterBig = (string) $show->ARTWORK_BIG;
-				$event->image[]   = (string) $show->IMAGE_1;
-				$event->image[]   = (string) $show->IMAGE_2;
-				$event->image[]   = (string) $show->IMAGE_3;
+				$event->images[]   = (string) $show->IMAGE_1;
+				$event->images[]   = (string) $show->IMAGE_2;
+				$event->images[]   = (string) $show->IMAGE_3;
 
 				$event->trailerUrl = trim($show->EVENT_TRAILER) ?: false;
 				$event->trailerId  = YouTubeHelper::parseYoutubeId($event->trailerUrl);
