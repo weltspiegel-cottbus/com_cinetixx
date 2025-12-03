@@ -2,6 +2,15 @@
     <changelog>
         <element>com_cinetixx</element>
         <type>component</type>
+        <version>0.3.0</version>
+        <addition>
+            <item>Ziehe alle Event/Film relevanten Daten von Cinetixx</item>
+            <item>Darstellung des einzelnen Events/Films (Detail-Ansicht)</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>com_cinetixx</element>
+        <type>component</type>
         <version>0.2.3</version>
         <fix>
             <item>Browser-Seitentitel korrigiert</item>

@@ -1,8 +1,8 @@
 {
   "name": "com_cinetixx",
+  "license": "MIT",
   "version": "0.2.3",
   "description": "Joomla-Komponente zur Cinetixx API-Anbindung",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/weltspiegel-cottbus/com_cinetixx.git"
