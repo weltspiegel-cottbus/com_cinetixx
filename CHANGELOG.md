@@ -1,3 +1,11 @@
+## v0.3.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.3.0...v0.3.1)
+
+### 🚀 Enhancements
+
+- Implement event list view. ([83608a8](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/83608a8))
+
 ## v0.3.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.3...v0.3.0)
