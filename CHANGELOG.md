@@ -1,3 +1,17 @@
+## v0.3.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.3...v0.3.0)
+
+### 🚀 Enhancements
+
+- Add relevant event infos from Cinetixx API. ([4fe2646](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/4fe2646))
+- Implement single event view. ([a8d26b9](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/a8d26b9))
+
+### 💅 Refactors
+
+- Simplify href. Remaining optimizations go into the router. ([8229d94](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/8229d94))
+- Renamed array prop to plural images. ([7c6f5dc](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/7c6f5dc))
+
 ## v0.2.3
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.2.2...v0.2.3)
