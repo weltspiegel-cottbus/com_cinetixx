@@ -57,7 +57,7 @@ window.addEventListener("resize", truncate);
 ');
 
 ?>
-<div>
+<div class="mb-4">
 	<h1><?php echo $this->escape($this->title); ?></h1>
 
 	<div class="d-flex flex-column gap-3">

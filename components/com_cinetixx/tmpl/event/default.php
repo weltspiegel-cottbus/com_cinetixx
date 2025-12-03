@@ -6,7 +6,7 @@ use Weltspiegel\Component\Cinetixx\Administrator\Helper\YouTubeHelper;
 
 $event = $this->item;
 ?>
-<div class="border border-dark p-2">
+<div class="border border-dark p-2 mb-4">
     <div class="d-flex d-sm-block gap-3 flex-column clearfix">
             <div class="float-start align-self-center p-1 bg-dark me-3 mb-1" style="height: 15rem; width: 10.75rem">
                 <img src="<?= $event->poster ?>" alt="Filmplakat <?= $event->title ?>">
