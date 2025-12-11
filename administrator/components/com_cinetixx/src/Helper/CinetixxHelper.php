@@ -113,6 +113,15 @@ abstract class CinetixxHelper
 
 				$events[$eventId] = $event;
 			}
+
+			$showTmp = new stdClass();
+			$showTmp->showId = (string) $show->SHOW_ID;
+			$showTmp->showStart = (string) $show->SHOW_BEGINNING;
+			$showTmp->bookingStart = (string) $show->VERKAUFSSTART;
+			$showTmp->bookingEnd   = (string) $show->VERKAUFSENDE;
+			$showTmp->bookingLink = (string) $show->BOOKING_LINK;
+
+			$events[$eventId]->shows[] = $showTmp;
 		}
 
 		$app = Factory::getApplication();
