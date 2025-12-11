@@ -2,6 +2,13 @@
     <changelog>
         <element>com_cinetixx</element>
         <type>component</type>
+        <version>0.4.0</version>
+        <addition>
+            <item>Vorstellungsdaten laden</item>
+        </addition>
+    </changelog>    <changelog>
+        <element>com_cinetixx</element>
+        <type>component</type>
         <version>0.3.1</version>
         <addition>
             <item>Darstellung der Events/Filme Liste (Programm)</item>

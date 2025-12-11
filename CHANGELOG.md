@@ -1,3 +1,15 @@
+## v0.4.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.3.1...v0.4.0)
+
+### 🚀 Enhancements
+
+- Add show infos ([3f78c68](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/3f78c68))
+
+### 🩹 Fixes
+
+- Add body bottom margins. ([acd4b4a](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/acd4b4a))
+
 ## v0.3.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.3.0...v0.3.1)
