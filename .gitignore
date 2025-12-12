@@ -1,2 +1,19 @@
-# Dev Environment
+# Build artifacts
+*.zip
+
+# Dependencies
+node_modules/
+
+# Development environment
 .env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

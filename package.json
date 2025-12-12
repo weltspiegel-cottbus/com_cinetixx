@@ -6,5 +6,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/weltspiegel-cottbus/com_cinetixx.git"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "changelog": "changelogen --output CHANGELOG.md --noAuthors",
+    "release:patch": "changelogen --release --patch --push --noAuthors",
+    "release:minor": "changelogen --release --minor --push --noAuthors",
+    "release:major": "changelogen --release --major --push --noAuthors"
+  },
+  "devDependencies": {
+    "changelogen": "^0.6.2"
   }
 }
