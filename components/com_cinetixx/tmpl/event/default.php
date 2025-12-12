@@ -2,6 +2,7 @@
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Layout\LayoutHelper;
 use Weltspiegel\Component\Cinetixx\Administrator\Helper\YouTubeHelper;
 
 $event = $this->item;
@@ -19,6 +20,8 @@ $event = $this->item;
                 FSK: <?= $event->fsk ?>
             </div>
     </div>
+
+    <?= LayoutHelper::render('showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
 
     <?php if (!empty($event->trailerId)): ?>
     <div style="max-width: 640px;" class="mt-4 mx-auto">
