@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_cinetixx",
+  "version": "0.3.1",
+  "description": "Cinetixx Component Assets",
+  "license": "MIT",
+  "assets": [
+    {
+      "name": "com_cinetixx.booking",
+      "type": "script",
+      "uri": "com_cinetixx/js/booking.js"
+    }
+  ]
+}

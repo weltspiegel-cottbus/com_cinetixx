@@ -39,7 +39,13 @@
     <files folder="components/com_cinetixx">
         <folder>src</folder>
         <folder>tmpl</folder>
+        <folder>layouts</folder>
     </files>
+
+    <media folder="media/com_cinetixx" destination="com_cinetixx">
+        <folder>js</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
 
     <changelogurl>https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/changelog.xml</changelogurl>
 
