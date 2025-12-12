@@ -1,3 +1,15 @@
+## v0.6.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.5.0...v0.6.0)
+
+### 💅 Refactors
+
+- Create seperate fieldsets for the params. ([f5083a4](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/f5083a4))
+
+### 🏡 Chore
+
+- Remove changelog URL from component manifest. ([d138ba5](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/d138ba5))
+
 ## v0.5.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.4.0...v0.5.0)
