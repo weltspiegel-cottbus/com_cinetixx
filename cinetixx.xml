@@ -2,7 +2,7 @@
 <extension type="component" method="upgrade">
 
     <name>Cinetixx</name>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <creationDate>November 2025</creationDate>
     <author>Michael Buchholz</author>
     <authorEmail>mail@lean-stack.rocks</authorEmail>

@@ -1,3 +1,20 @@
+## v0.5.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.4.0...v0.5.0)
+
+### 🚀 Enhancements
+
+- Add booking link layout helper. ([1b297ae](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/1b297ae))
+- Register script to make the booking link opening a modal ([bb1adb5](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/bb1adb5))
+
+### 💅 Refactors
+
+- Make link type configurable. ([0b15b58](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/0b15b58))
+
+### 🏡 Chore
+
+- Update workflow for automated updates. ([f6438d8](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/f6438d8))
+
 ## v0.4.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.3.1...v0.4.0)
