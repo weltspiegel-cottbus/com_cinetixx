@@ -47,8 +47,6 @@
         <filename>joomla.asset.json</filename>
     </media>
 
-    <changelogurl>https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/changelog.xml</changelogurl>
-
     <updateservers>
         <server type="extension" priority="1" name="Cinetixx Component Updates">https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/update-manifest.xml</server>
     </updateservers>
