@@ -4,11 +4,5 @@
   "version": "0.6.0",
   "description": "Cinetixx Component Assets",
   "license": "MIT",
-  "assets": [
-    {
-      "name": "com_cinetixx.booking",
-      "type": "script",
-      "uri": "com_cinetixx/js/booking.js"
-    }
-  ]
+  "assets": []
 }

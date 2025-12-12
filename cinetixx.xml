@@ -43,7 +43,6 @@
     </files>
 
     <media folder="media/com_cinetixx" destination="com_cinetixx">
-        <folder>js</folder>
         <filename>joomla.asset.json</filename>
     </media>
 
