@@ -71,12 +71,49 @@ foreach ($event->shows as $show) {
 }
 
 // Format date labels
-$formatter = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
-$formatter->setPattern('EEE, dd.MM.');
+$formatterDay = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+$formatterDay->setPattern('EEE');
+$formatterDate = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+$formatterDate->setPattern('dd.MM.');
 
 ?>
 <div class="showbox mt-3">
-    <table class="table table-sm table-bordered">
+    <!-- Mobile: Vertical Layout -->
+    <table class="table table-sm table-bordered d-md-none">
+        <tbody>
+        <?php foreach ($targetDays as $dayKey => $date): ?>
+            <?php if (!empty($showsByDay[$dayKey])): ?>
+                <tr>
+                    <td class="fw-bold">
+                        <?php if ($dayKey === $today): ?>
+                            Heute
+                        <?php else: ?>
+                            <?= $formatterDay->format($date) ?>, <?= $formatterDate->format($date) ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php foreach ($showsByDay[$dayKey] as $show): ?>
+                            <?php
+                            $showDateTime = new DateTime($show->showStart);
+                            ?>
+                            <?= LayoutHelper::render('booking.link', [
+                                'showId' => $show->showId,
+                                'label' => $showDateTime->format('H:i'),
+                                'options' => ['class' => 'text-decoration-none']
+                            ], JPATH_SITE . '/components/com_cinetixx/layouts') ?>
+                            <?php if ($show !== end($showsByDay[$dayKey])): ?>
+                                 |
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <!-- Desktop: Horizontal Layout -->
+    <table class="table table-sm table-bordered d-none d-md-table">
         <thead>
             <tr>
                 <?php foreach ($targetDays as $dayKey => $date): ?>
@@ -84,7 +121,7 @@ $formatter->setPattern('EEE, dd.MM.');
                         <?php if ($dayKey === $today): ?>
                             Heute
                         <?php else: ?>
-                            <?= $formatter->format($date) ?>
+                            <?= $formatterDay->format($date) ?><br><?= $formatterDate->format($date) ?>
                         <?php endif; ?>
                     </th>
                 <?php endforeach; ?>
@@ -105,7 +142,7 @@ $formatter->setPattern('EEE, dd.MM.');
                                 <?= LayoutHelper::render('booking.link', [
                                     'showId' => $show->showId,
                                     'label' => $showDateTime->format('H:i'),
-                                    'options' => []
+                                    'options' => ['class' => 'text-decoration-none']
                                 ], JPATH_SITE . '/components/com_cinetixx/layouts') ?>
                             <?php endforeach; ?>
                         <?php else: ?>
