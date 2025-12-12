@@ -2,7 +2,9 @@
 <config>
     <fieldset name="cinetixx" label="Cinetixx">
         <field name="mandator_id" type="text" default="" label="Mandator ID" />
+    </fieldset>
 
+    <fieldset name="kinoheld" label="Kinoheld">
         <field
             name="booking_link_type"
             type="list"
