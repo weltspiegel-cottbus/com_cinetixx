@@ -40,18 +40,4 @@ abstract class YouTubeHelper
 		preg_match(self::YOUTUBE_REGEX, $url, $matches);
 		return $matches[1] ?? false;
 	}
-
-	/**
-	 * Generates a no-cookies YouTube url
-	 *
-	 * @param $youTubeId
-	 *
-	 * @return string
-	 *
-	 * @since 1.0.0
-	 */
-	public static function generateTrailerLink($youTubeId): string
-	{
-		return "https://www.youtube-nocookie.com/embed/$youTubeId";
-	}
 }

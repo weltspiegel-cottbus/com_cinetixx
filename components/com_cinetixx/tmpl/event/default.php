@@ -20,7 +20,7 @@ $event = $this->item;
             </div>
     </div>
 
-    <?= LayoutHelper::render('showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
+    <?= LayoutHelper::render('booking.showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
 
     <?php if (!empty($event->trailerId)): ?>
         <?= LayoutHelper::render('youtube.embed', ['videoId' => $event->trailerId], JPATH_SITE . '/components/com_cinetixx/layouts') ?>
