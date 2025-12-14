@@ -1,3 +1,14 @@
+## v0.6.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.6.0...v0.6.1)
+
+### 💅 Refactors
+
+- Display horizontal on desktop and vertical on mobile devices. ([c0206c0](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/c0206c0))
+- Remove the modal booking link addition. Just a new tab for now. ([a77d965](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/a77d965))
+- Replace the immediatly insertion of the trailer with a consent-aware. ([bcce21b](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/bcce21b))
+- Cleaned up layouts and helper file. ([b3940b4](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/b3940b4))
+
 ## v0.6.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.5.0...v0.6.0)
