@@ -3,7 +3,6 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Layout\LayoutHelper;
-use Weltspiegel\Component\Cinetixx\Administrator\Helper\YouTubeHelper;
 
 $event = $this->item;
 ?>
@@ -24,16 +23,9 @@ $event = $this->item;
     <?= LayoutHelper::render('showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
 
     <?php if (!empty($event->trailerId)): ?>
-    <div style="max-width: 640px;" class="mt-4 mx-auto">
-        <div style="padding-top: 56.25%; /* 16:9 */" class="overflow-hidden position-relative">
-            <iframe class="p-1 bg-dark position-absolute top-0 start-0 w-100 h-100"
-                    src="<?= YouTubeHelper::generateTrailerLink($event->trailerId) ?>"
-                    allowfullscreen
-                    referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
-        </div>
-    </div>
+        <?= LayoutHelper::render('youtube.embed', ['videoId' => $event->trailerId], JPATH_SITE . '/components/com_cinetixx/layouts') ?>
     <?php endif; ?>
+
     <div class="mt-4 d-flex justify-content-around gap-2">
         <?php foreach ($event->images as $ix => $image): ?>
         <div>
