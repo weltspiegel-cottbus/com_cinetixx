@@ -1,3 +1,11 @@
+## v0.6.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.6.1...v0.6.2)
+
+### 🩹 Fixes
+
+- Updated helper name to respect movement. ([8d913b2](https://github.com/weltspiegel-cottbus/com_cinetixx/commit/8d913b2))
+
 ## v0.6.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.6.0...v0.6.1)
