@@ -97,7 +97,7 @@ $futureHeadingShown = false;
                 Sprache: <?= $event->languageShort ?>,
                 FSK: <?= $event->fsk ?>
             </div>
-            <?= LayoutHelper::render('showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
+            <?= LayoutHelper::render('booking.showbox', $event, JPATH_SITE . '/components/com_cinetixx/layouts') ?>
         </div>
 		<?php endforeach; ?>
 
