@@ -1,8 +1,0 @@
-{
-  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
-  "name": "com_cinetixx",
-  "version": "0.6.2",
-  "description": "Cinetixx Component Assets",
-  "license": "MIT",
-  "assets": []
-}

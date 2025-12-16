@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_weltspiegel",
+  "version": "0.6.2",
+  "description": "Weltspiegel Component Assets",
+  "license": "MIT",
+  "assets": []
+}

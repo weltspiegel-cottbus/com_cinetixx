@@ -1,11 +1,11 @@
 {
-  "name": "com_cinetixx",
+  "name": "com_weltspiegel",
   "license": "MIT",
   "version": "0.6.2",
-  "description": "Joomla-Komponente zur Cinetixx API-Anbindung",
+  "description": "Joomla-Komponente für den Weltspiegel Cottbus",
   "repository": {
     "type": "git",
-    "url": "https://github.com/weltspiegel-cottbus/com_cinetixx.git"
+    "url": "https://github.com/weltspiegel-cottbus/com_weltspiegel.git"
   },
   "scripts": {
     "build": "node build.js",

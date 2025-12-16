@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Build script for com_cinetixx
+ * Build script for com_weltspiegel
  * Creates a ZIP file ready for Joomla installation
  */
 
@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const componentName = 'com_cinetixx';
+const componentName = 'com_weltspiegel';
 const version = require('./package.json').version;
 const outputFile = `${componentName}-${version}.zip`;
 
