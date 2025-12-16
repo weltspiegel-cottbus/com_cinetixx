@@ -1,6 +1,6 @@
-# Cinetixx Component
+# Weltspiegel Component
 
-Joomla 5/6 component for integrating with the Cinetixx API to display movies and showtimes.
+Joomla 5/6 component for Weltspiegel Cottbus cinema, integrating with the Cinetixx API to display movies and showtimes.
 
 ## Description
 
@@ -23,12 +23,11 @@ This component provides movie and showtime management by fetching data from the 
 
 2. Upload the generated ZIP file via Joomla Administrator:
    - System → Extensions → Install
-   - Upload `com_cinetixx-*.zip`
+   - Upload `com_weltspiegel-*.zip`
 
 3. Configure the component:
-   - Components → Cinetixx
+   - Components → Weltspiegel
    - Set your Mandator ID
-   - Configure booking link type (new tab, same tab, or modal)
 
 ### Via GitHub Releases
 
@@ -42,7 +41,7 @@ Once installed, the component can be updated automatically through Joomla's upda
 - New versions are automatically detected and can be installed with one click
 
 The update manifest is hosted at:
-`https://raw.githubusercontent.com/weltspiegel-cottbus/com_cinetixx/main/update-manifest.xml`
+`https://raw.githubusercontent.com/weltspiegel-cottbus/com_weltspiegel/main/update-manifest.xml`
 
 ## Development
 
@@ -52,7 +51,7 @@ The update manifest is hosted at:
 pnpm build
 ```
 
-This creates a `com_cinetixx-{version}.zip` file ready for Joomla installation.
+This creates a `com_weltspiegel-{version}.zip` file ready for Joomla installation.
 
 ### Creating Releases
 
@@ -98,17 +97,17 @@ pnpm install
 
 **Before releasing**, update version numbers and create SQL migration:
 
-1. **`cinetixx.xml`**:
+1. **`weltspiegel.xml`**:
    - Update the `<version>` tag to match the new version
 
 2. **`update-manifest.xml`**:
    - Update the `<version>` tag to match the new version
    - Update the download URL to match the new version tag and filename
 
-3. **`media/com_cinetixx/joomla.asset.json`**:
+3. **`media/com_weltspiegel/joomla.asset.json`**:
    - Update the `version` field to match the new version
 
-4. **`administrator/components/com_cinetixx/sql/updates/{version}.sql`**:
+4. **`administrator/components/com_weltspiegel/sql/updates/{version}.sql`**:
    - Create a new SQL migration file named with the new version (e.g., `1.1.0.sql`)
    - For releases without database changes, use: `# Empty - No database updates`
    - This ensures Joomla's version tracking works correctly
@@ -148,11 +147,10 @@ pnpm changelog
 ### What Gets Packaged
 
 The build script includes only the necessary files:
-- `cinetixx.xml` - Component manifest
+- `weltspiegel.xml` - Component manifest
 - `administrator/` - Backend component files
 - `components/` - Frontend component files
 - `media/` - JavaScript and asset files
-- `changelog.xml` - Joomla changelog format
 
 Excluded from package:
 - `.idea/` - IDE files
@@ -187,7 +185,7 @@ No manual intervention needed - just run the release command!
 
 - **Event Management**: Fetches current movies from Cinetixx API
 - **Showtime Display**: Shows upcoming showtimes for each movie
-- **Booking Integration**: Configurable booking links (new tab, same tab, or modal)
+- **Booking Integration**: Links to external booking system
 - **Responsive Design**: Mobile-friendly layouts
 - **Template Overrides**: Supports Joomla template overrides
 - **Automatic Updates**: Self-updating via Joomla's update system
