@@ -1,3 +1,11 @@
+## v0.7.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.6.2...v0.7.0)
+
+### 💅 Refactors
+
+- Renamed component to com_weltspiegel. ([f4ce23d](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/f4ce23d))
+
 ## v0.6.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_cinetixx/compare/v0.6.1...v0.6.2)

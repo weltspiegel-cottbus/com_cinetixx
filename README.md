@@ -109,7 +109,7 @@ pnpm install
    - Update the `version` field to match the new version
 
 4. **`administrator/components/com_cinetixx/sql/updates/{version}.sql`**:
-   - Create a new SQL migration file named with the new version (e.g., `0.6.2.sql`)
+   - Create a new SQL migration file named with the new version (e.g., `1.1.0.sql`)
    - For releases without database changes, use: `# Empty - No database updates`
    - This ensures Joomla's version tracking works correctly
 
