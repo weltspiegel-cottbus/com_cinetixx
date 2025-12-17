@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Layout for displaying showtimes for next 7 days
+ * Layout for displaying showtimes with sliding 7-day viewport navigation
  *
  * @package     Weltspiegel\Component\Weltspiegel
  * @copyright   Weltspiegel Cottbus
@@ -22,135 +22,336 @@ if (empty($event->shows) || !is_array($event->shows)) {
     return;
 }
 
-// Get current date/time
-$now = new DateTime();
+// Get current date/time (use Europe/Berlin timezone to match show data)
+$timezone = new DateTimeZone('Europe/Berlin');
+$now = new DateTime('now', $timezone);
 $today = $now->format('Y-m-d');
 
-// Get the first show date (shows are already ordered)
-try {
-    $firstShowDate = new DateTime($event->shows[0]->showStart);
-} catch (Exception $e) {
-    return; // No valid first show
-}
+// Initial date range: today + 7 days
+$dateFrom = (new DateTime('now', $timezone))->setTime(0, 0);
+$dateTo = (clone $dateFrom)->modify('+7 days');
+$startingFromToday = true;
 
-// Determine which week to display
-$weekOffset = 0;
-$daysUntilFirstShow = $now->diff($firstShowDate)->days;
-
-// If first show is 7+ days away, calculate which week to display
-if ($daysUntilFirstShow >= 7) {
-    $weekOffset = floor($daysUntilFirstShow / 7);
-}
-
-// Build array of 7 days for the target week
-$showsByDay = [];
-$targetDays = [];
-$startDate = (clone $now)->modify("+{$weekOffset} weeks");
-
-for ($i = 0; $i < 7; $i++) {
-    $date = (clone $startDate)->modify("+{$i} days");
-    $dayKey = $date->format('Y-m-d');
-    $targetDays[$dayKey] = $date;
-    $showsByDay[$dayKey] = [];
-}
-
-// Filter and group shows for the target week
-foreach ($event->shows as $show) {
+// Check if first show is beyond current week
+if (!empty($event->shows)) {
     try {
-        $showDateTime = new DateTime($show->showStart);
-        $showDate = $showDateTime->format('Y-m-d');
+        $firstShowStart = new DateTime($event->shows[0]->showStart);
 
-        // Only include shows from the target week
-        if (isset($showsByDay[$showDate])) {
-            $showsByDay[$showDate][] = $show;
+        if ($firstShowStart > $dateTo) {
+            // Jump to the week containing the first show, aligned to current weekday
+            $firstShowtimeWeekday = $firstShowStart->format('D');
+            $currentWeekday = (new DateTime())->format('D');
+
+            if ($firstShowtimeWeekday !== $currentWeekday) {
+                $firstShowStart->modify('last ' . $currentWeekday);
+            }
+            $firstShowStart->setTime(0, 0);
+
+            $dateFrom = $firstShowStart;
+            $dateTo = (clone $dateFrom)->modify('+7 days');
+            $startingFromToday = false;
         }
     } catch (Exception $e) {
-        // Skip invalid dates
-        continue;
+        // Continue with default date range
     }
 }
 
-// Format date labels
-$formatterDay = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+// Get the last show date (shows are sorted)
+$lastShow = end($event->shows);
+$lastShowDate = new DateTime($lastShow->showStart);
+
+// Build viewports (weeks with shows)
+$viewports = [];
+
+// Helper function to count shows in a date range
+$countShowsInRange = function($shows, $from, $to) {
+    $count = 0;
+    foreach ($shows as $show) {
+        try {
+            $showtime = new DateTime($show->showStart);
+            if ($showtime > $from && $showtime < $to) {
+                $count++;
+            }
+        } catch (Exception $e) {
+            continue;
+        }
+    }
+    return $count;
+};
+
+// Build weeks until we pass the last show (skip empty weeks)
+while ($dateFrom <= $lastShowDate) {
+    // Check if this week has any shows
+    $showCount = $countShowsInRange($event->shows, $dateFrom, $dateTo);
+
+    // Only create viewport if there are shows this week
+    if ($showCount > 0) {
+    $viewport = [
+        'dateFrom' => clone $dateFrom,
+        'dateTo' => clone $dateTo,
+        'days' => [],
+        'isFirstWeek' => $startingFromToday,
+        'label' => $dateFrom->format('d.m.') . ' - ' . (clone $dateTo)->modify('-1 day')->format('d.m.Y')
+    ];
+
+    // Build 7 days for this viewport
+    $date = clone $dateFrom;
+    for ($i = 0; $i < 7; $i++) {
+        $midnight = (clone $date)->modify('+1 day');
+        $dayKey = $date->format('Y-m-d');
+
+        $dayShows = [];
+        foreach ($event->shows as $show) {
+            try {
+                $showtime = new DateTime($show->showStart);
+                if ($showtime > $date && $showtime < $midnight) {
+                    $dayShows[] = $show;
+                }
+            } catch (Exception $e) {
+                continue;
+            }
+        }
+
+        $viewport['days'][$dayKey] = [
+            'date' => clone $date,
+            'shows' => $dayShows
+        ];
+
+        $date->modify('+1 day');
+    }
+
+        $viewports[] = $viewport;
+    }
+
+    // Move to next week (whether we added a viewport or not)
+    $dateFrom = $dateTo;
+    $dateTo = (clone $dateTo)->modify('+7 days');
+    $startingFromToday = false;
+}
+
+// Return early if no viewports (no shows in any range)
+if (empty($viewports)) {
+    return;
+}
+
+// Generate unique ID for this showbox instance
+$showboxId = 'showbox-' . uniqid();
+
+// Format date labels (with Europe/Berlin timezone)
+$formatterDay = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE, 'Europe/Berlin');
 $formatterDay->setPattern('EEE');
-$formatterDate = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+$formatterDate = new IntlDateFormatter('de_DE', IntlDateFormatter::NONE, IntlDateFormatter::NONE, 'Europe/Berlin');
 $formatterDate->setPattern('dd.MM.');
 
 ?>
-<div class="showbox mt-3">
-    <!-- Mobile: Vertical Layout -->
-    <table class="table table-sm table-bordered d-md-none">
-        <tbody>
-        <?php foreach ($targetDays as $dayKey => $date): ?>
-            <?php if (!empty($showsByDay[$dayKey])): ?>
-                <tr>
-                    <td class="fw-bold">
-                        <?php if ($dayKey === $today): ?>
-                            Heute
-                        <?php else: ?>
-                            <?= $formatterDay->format($date) ?>, <?= $formatterDate->format($date) ?>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <?php foreach ($showsByDay[$dayKey] as $show): ?>
-                            <?php
-                            $showDateTime = new DateTime($show->showStart);
-                            ?>
-                            <?= LayoutHelper::render('booking.link', [
-                                'showId' => $show->showId,
-                                'label' => $showDateTime->format('H:i'),
-                                'options' => ['class' => 'text-decoration-none']
-                            ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
-                            <?php if ($show !== end($showsByDay[$dayKey])): ?>
-                                 |
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </td>
-                </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
 
-    <!-- Desktop: Horizontal Layout -->
-    <table class="table table-sm table-bordered d-none d-md-table">
-        <thead>
-            <tr>
-                <?php foreach ($targetDays as $dayKey => $date): ?>
-                    <th class="text-center">
-                        <?php if ($dayKey === $today): ?>
-                            Heute
-                        <?php else: ?>
-                            <?= $formatterDay->format($date) ?><br><?= $formatterDate->format($date) ?>
-                        <?php endif; ?>
-                    </th>
-                <?php endforeach; ?>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <?php foreach ($targetDays as $dayKey => $date): ?>
-                    <td class="text-center align-top">
-                        <?php if (!empty($showsByDay[$dayKey])): ?>
-                            <?php foreach ($showsByDay[$dayKey] as $index => $show): ?>
-                                <?php
-                                $showDateTime = new DateTime($show->showStart);
-                                ?>
-                                <?php if ($index > 0): ?>
-                                    <br>
-                                <?php endif; ?>
-                                <?= LayoutHelper::render('booking.link', [
-                                    'showId' => $show->showId,
-                                    'label' => $showDateTime->format('H:i'),
-                                    'options' => ['class' => 'text-decoration-none']
-                                ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+<style>
+.showbox-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.showbox-nav-btn {
+    background: none;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.showbox-nav-btn:not(:disabled):hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.showbox-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.showbox-nav-btn svg {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+}
+
+.showbox-viewport {
+    display: none;
+}
+
+.showbox-viewport.active {
+    display: block;
+}
+</style>
+
+<div class="showbox mt-3" id="<?= $showboxId ?>">
+    <!-- Desktop: Horizontal Layout with Navigation -->
+    <div class="d-none d-md-block">
+        <?php if (count($viewports) > 1): ?>
+            <div class="showbox-navigation">
+                <button type="button" class="showbox-nav-btn" data-action="prev" aria-label="Vorherige Woche">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <span class="showbox-viewport-info fw-bold"></span>
+                <button type="button" class="showbox-nav-btn" data-action="next" aria-label="Nächste Woche">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <?php foreach ($viewports as $viewportIndex => $viewport): ?>
+            <div class="showbox-viewport <?= $viewportIndex === 0 ? 'active' : '' ?>" data-viewport="<?= $viewportIndex ?>" data-label="<?= htmlspecialchars($viewport['label']) ?>">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <?php $dayIndex = 0; ?>
+                            <?php foreach ($viewport['days'] as $dayKey => $dayData): ?>
+                                <th class="text-center">
+                                    <?php if ($dayIndex === 0 && $viewport['isFirstWeek']): ?>
+                                        Heute
+                                    <?php else: ?>
+                                        <?= $formatterDay->format($dayData['date']) ?><br><?= $formatterDate->format($dayData['date']) ?>
+                                    <?php endif; ?>
+                                </th>
+                                <?php $dayIndex++; ?>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            &nbsp;
-                        <?php endif; ?>
-                    </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php foreach ($viewport['days'] as $dayKey => $dayData): ?>
+                                <td class="text-center align-top">
+                                    <?php if (!empty($dayData['shows'])): ?>
+                                        <?php foreach ($dayData['shows'] as $index => $show): ?>
+                                            <?php
+                                            $showDateTime = new DateTime($show->showStart);
+                                            ?>
+                                            <?php if ($index > 0): ?>
+                                                <br>
+                                            <?php endif; ?>
+                                            <?= LayoutHelper::render('booking.link', [
+                                                'showId' => $show->showId,
+                                                'label' => $showDateTime->format('H:i'),
+                                                'options' => ['class' => 'text-decoration-none']
+                                            ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        &nbsp;
+                                    <?php endif; ?>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Mobile: Vertical Layout (All Viewports Stacked) -->
+    <div class="d-md-none">
+        <?php foreach ($viewports as $viewport): ?>
+            <table class="table table-sm table-bordered mb-3">
+                <tbody>
+                <?php $dayIndex = 0; ?>
+                <?php foreach ($viewport['days'] as $dayKey => $dayData): ?>
+                    <?php if (!empty($dayData['shows'])): ?>
+                        <tr>
+                            <td class="fw-bold">
+                                <?php if ($dayIndex === 0 && $viewport['isFirstWeek']): ?>
+                                    Heute
+                                <?php else: ?>
+                                    <?= $formatterDay->format($dayData['date']) ?>, <?= $formatterDate->format($dayData['date']) ?>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php foreach ($dayData['shows'] as $show): ?>
+                                    <?php
+                                    $showDateTime = new DateTime($show->showStart);
+                                    ?>
+                                    <?= LayoutHelper::render('booking.link', [
+                                        'showId' => $show->showId,
+                                        'label' => $showDateTime->format('H:i'),
+                                        'options' => ['class' => 'text-decoration-none']
+                                    ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                    <?php if ($show !== end($dayData['shows'])): ?>
+                                         |
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php $dayIndex++; ?>
                 <?php endforeach; ?>
-            </tr>
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        <?php endforeach; ?>
+    </div>
 </div>
+
+<?php if (count($viewports) > 1): ?>
+<script>
+(function() {
+    'use strict';
+
+    const showboxId = '<?= $showboxId ?>';
+    const showbox = document.getElementById(showboxId);
+
+    if (!showbox) {
+        return;
+    }
+
+    const viewports = showbox.querySelectorAll('.showbox-viewport');
+    const prevBtn = showbox.querySelector('[data-action="prev"]');
+    const nextBtn = showbox.querySelector('[data-action="next"]');
+    const viewportInfo = showbox.querySelector('.showbox-viewport-info');
+
+    if (!prevBtn || !nextBtn || !viewportInfo) {
+        return;
+    }
+
+    let currentViewportIndex = 0;
+
+    function updateDisplay() {
+        // Hide all viewports
+        viewports.forEach(viewport => viewport.classList.remove('active'));
+
+        // Show current viewport
+        if (viewports[currentViewportIndex]) {
+            viewports[currentViewportIndex].classList.add('active');
+
+            // Update viewport info label
+            const viewportLabel = viewports[currentViewportIndex].dataset.label;
+            viewportInfo.textContent = viewportLabel;
+        }
+
+        // Update button states
+        prevBtn.disabled = currentViewportIndex === 0;
+        nextBtn.disabled = currentViewportIndex === viewports.length - 1;
+    }
+
+    function navigateViewport(direction) {
+        if (direction === 'prev' && currentViewportIndex > 0) {
+            currentViewportIndex--;
+        } else if (direction === 'next' && currentViewportIndex < viewports.length - 1) {
+            currentViewportIndex++;
+        }
+        updateDisplay();
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => navigateViewport('prev'));
+    nextBtn.addEventListener('click', () => navigateViewport('next'));
+
+    // Initialize
+    updateDisplay();
+})();
+</script>
+<?php endif; ?>
