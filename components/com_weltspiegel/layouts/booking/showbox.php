@@ -262,51 +262,57 @@ $formatterDate->setPattern('dd.MM.');
         <?php endforeach; ?>
     </div>
 
-    <!-- Mobile: Vertical Layout (All Viewports Stacked) -->
+    <!-- Mobile: Vertical Layout (Single Table) -->
     <div class="d-md-none">
-        <?php foreach ($viewports as $viewport): ?>
-            <table class="table table-sm table-bordered mb-3">
-                <tbody>
-                <?php $dayIndex = 0; ?>
-                <?php foreach ($viewport['days'] as $dayKey => $dayData): ?>
-                    <?php if (!empty($dayData['shows'])): ?>
-                        <tr>
-                            <td class="fw-bold">
-                                <?php if ($dayIndex === 0 && $viewport['isFirstWeek']): ?>
-                                    Heute
-                                <?php else: ?>
-                                    <?= $formatterDay->format($dayData['date']) ?>, <?= $formatterDate->format($dayData['date']) ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php foreach ($dayData['shows'] as $show): ?>
-                                    <?php
-                                    $showDateTime = new DateTime($show->showStart);
-                                    $bookingStart = new DateTime($show->bookingStart);
-                                    $bookingEnd = new DateTime($show->bookingEnd);
-                                    $isBookable = ($now >= $bookingStart && $now <= $bookingEnd);
-                                    ?>
-                                    <?php if ($isBookable): ?>
-                                        <?= LayoutHelper::render('booking.link', [
-                                            'showId' => $show->showId,
-                                            'label' => $showDateTime->format('H:i'),
-                                            'options' => ['class' => 'text-decoration-none']
-                                        ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
-                                    <?php else: ?>
-                                        <?= $showDateTime->format('H:i') ?>
-                                    <?php endif; ?>
-                                    <?php if ($show !== end($dayData['shows'])): ?>
-                                         |
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
-                    <?php $dayIndex++; ?>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endforeach; ?>
+        <table class="table table-sm table-bordered">
+            <tbody>
+            <?php
+            $isFirstDay = true;
+            foreach ($viewports as $viewport):
+                $dayIndex = 0;
+                foreach ($viewport['days'] as $dayKey => $dayData):
+                    if (!empty($dayData['shows'])):
+            ?>
+                <tr>
+                    <td class="fw-bold">
+                        <?php if ($isFirstDay && $viewport['isFirstWeek']): ?>
+                            Heute
+                        <?php else: ?>
+                            <?= $formatterDay->format($dayData['date']) ?>, <?= $formatterDate->format($dayData['date']) ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php foreach ($dayData['shows'] as $show): ?>
+                            <?php
+                            $showDateTime = new DateTime($show->showStart);
+                            $bookingStart = new DateTime($show->bookingStart);
+                            $bookingEnd = new DateTime($show->bookingEnd);
+                            $isBookable = ($now >= $bookingStart && $now <= $bookingEnd);
+                            ?>
+                            <?php if ($isBookable): ?>
+                                <?= LayoutHelper::render('booking.link', [
+                                    'showId' => $show->showId,
+                                    'label' => $showDateTime->format('H:i'),
+                                    'options' => ['class' => 'text-decoration-none']
+                                ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                            <?php else: ?>
+                                <?= $showDateTime->format('H:i') ?>
+                            <?php endif; ?>
+                            <?php if ($show !== end($dayData['shows'])): ?>
+                                 |
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </td>
+                </tr>
+            <?php
+                        $isFirstDay = false;
+                    endif;
+                    $dayIndex++;
+                endforeach;
+            endforeach;
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
