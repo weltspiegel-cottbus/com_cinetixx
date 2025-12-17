@@ -1,3 +1,12 @@
+## v0.7.3
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.2...v0.7.3)
+
+### 💅 Refactors
+
+- Make oudated shows not bookable. ([98c9006](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/98c9006))
+- Do not separate weeks in mobile showbox. ([f1f8414](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/f1f8414))
+
 ## v0.7.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.1...v0.7.2)
