@@ -1,7 +1,7 @@
 {
   "name": "com_weltspiegel",
   "license": "MIT",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Joomla-Komponente für den Weltspiegel Cottbus",
   "repository": {
     "type": "git",

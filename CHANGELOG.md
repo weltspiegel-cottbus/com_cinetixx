@@ -1,3 +1,15 @@
+## v0.7.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.0...v0.7.1)
+
+### 🚀 Enhancements
+
+- Make showbox showing all events - not only current week. ([3e97ca4](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/3e97ca4))
+
+### 🩹 Fixes
+
+- Update wording due to project rename. And fix some deprecations. ([4645156](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/4645156))
+
 ## v0.7.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.6.2...v0.7.0)
