@@ -1,3 +1,11 @@
+## v0.7.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.1...v0.7.2)
+
+### 🏡 Chore
+
+- Update workflow for automated updates. ([7a184b6](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/7a184b6))
+
 ## v0.7.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.0...v0.7.1)
