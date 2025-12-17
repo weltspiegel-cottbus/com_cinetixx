@@ -233,15 +233,22 @@ $formatterDate->setPattern('dd.MM.');
                                         <?php foreach ($dayData['shows'] as $index => $show): ?>
                                             <?php
                                             $showDateTime = new DateTime($show->showStart);
+                                            $bookingStart = new DateTime($show->bookingStart);
+                                            $bookingEnd = new DateTime($show->bookingEnd);
+                                            $isBookable = ($now >= $bookingStart && $now <= $bookingEnd);
                                             ?>
                                             <?php if ($index > 0): ?>
                                                 <br>
                                             <?php endif; ?>
-                                            <?= LayoutHelper::render('booking.link', [
-                                                'showId' => $show->showId,
-                                                'label' => $showDateTime->format('H:i'),
-                                                'options' => ['class' => 'text-decoration-none']
-                                            ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                            <?php if ($isBookable): ?>
+                                                <?= LayoutHelper::render('booking.link', [
+                                                    'showId' => $show->showId,
+                                                    'label' => $showDateTime->format('H:i'),
+                                                    'options' => ['class' => 'text-decoration-none']
+                                                ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                            <?php else: ?>
+                                                <?= $showDateTime->format('H:i') ?>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         &nbsp;
@@ -275,12 +282,19 @@ $formatterDate->setPattern('dd.MM.');
                                 <?php foreach ($dayData['shows'] as $show): ?>
                                     <?php
                                     $showDateTime = new DateTime($show->showStart);
+                                    $bookingStart = new DateTime($show->bookingStart);
+                                    $bookingEnd = new DateTime($show->bookingEnd);
+                                    $isBookable = ($now >= $bookingStart && $now <= $bookingEnd);
                                     ?>
-                                    <?= LayoutHelper::render('booking.link', [
-                                        'showId' => $show->showId,
-                                        'label' => $showDateTime->format('H:i'),
-                                        'options' => ['class' => 'text-decoration-none']
-                                    ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                    <?php if ($isBookable): ?>
+                                        <?= LayoutHelper::render('booking.link', [
+                                            'showId' => $show->showId,
+                                            'label' => $showDateTime->format('H:i'),
+                                            'options' => ['class' => 'text-decoration-none']
+                                        ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                    <?php else: ?>
+                                        <?= $showDateTime->format('H:i') ?>
+                                    <?php endif; ?>
                                     <?php if ($show !== end($dayData['shows'])): ?>
                                          |
                                     <?php endif; ?>
