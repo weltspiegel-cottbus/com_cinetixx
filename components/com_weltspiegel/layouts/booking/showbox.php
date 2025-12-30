@@ -305,8 +305,8 @@ $formatterDate->setPattern('dd.MM.');
                     </td>
                 </tr>
             <?php
-                        $isFirstDay = false;
                     endif;
+                    $isFirstDay = false;
                     $dayIndex++;
                 endforeach;
             endforeach;
