@@ -1,3 +1,11 @@
+## v0.7.4
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.3...v0.7.4)
+
+### 🩹 Fixes
+
+- Show "Heute" only for really today events. ([9a39b38](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/9a39b38))
+
 ## v0.7.3
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.2...v0.7.3)
