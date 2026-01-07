@@ -77,9 +77,12 @@ $uniqueId = 'yt-' . $videoId . '-' . uniqid();
         try {
             var consent = localStorage.getItem('cookie_consent');
             if (consent === 'granted') {
+                // Only show iframe after it has loaded
+                iframe.addEventListener('load', function() {
+                    iframe.style.display = 'block';
+                    placeholder.style.display = 'none';
+                }, { once: true });
                 iframe.src = iframe.dataset.src;
-                iframe.style.display = 'block';
-                placeholder.style.display = 'none';
             } else {
                 placeholder.style.display = 'flex';
                 iframe.style.display = 'none';
