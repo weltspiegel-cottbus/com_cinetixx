@@ -1,3 +1,11 @@
+## v0.7.6
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.5...v0.7.6)
+
+### 🩹 Fixes
+
+- Must not use explicit component paths with LayoutHelper. ([0b1b691](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0b1b691))
+
 ## v0.7.5
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.4...v0.7.5)
