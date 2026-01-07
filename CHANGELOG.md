@@ -1,3 +1,11 @@
+## v0.7.5
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.4...v0.7.5)
+
+### 🩹 Fixes
+
+- Show iframe after loading of trailer. Resolves #10 ([#10](https://github.com/weltspiegel-cottbus/com_weltspiegel/issues/10))
+
 ## v0.7.4
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.3...v0.7.4)
