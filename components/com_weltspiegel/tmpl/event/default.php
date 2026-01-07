@@ -20,10 +20,10 @@ $event = $this->item;
             </div>
     </div>
 
-    <?= LayoutHelper::render('booking.showbox', $event, JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+    <?= LayoutHelper::render('booking.showbox', $event) ?>
 
     <?php if (!empty($event->trailerId)): ?>
-        <?= LayoutHelper::render('youtube.embed', ['videoId' => $event->trailerId], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+        <?= LayoutHelper::render('youtube.embed', ['videoId' => $event->trailerId]) ?>
     <?php endif; ?>
 
     <div class="mt-4 d-flex justify-content-around gap-2">

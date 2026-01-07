@@ -245,7 +245,7 @@ $formatterDate->setPattern('dd.MM.');
                                                     'showId' => $show->showId,
                                                     'label' => $showDateTime->format('H:i'),
                                                     'options' => ['class' => 'text-decoration-none']
-                                                ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                                ]) ?>
                                             <?php else: ?>
                                                 <?= $showDateTime->format('H:i') ?>
                                             <?php endif; ?>
@@ -294,7 +294,7 @@ $formatterDate->setPattern('dd.MM.');
                                     'showId' => $show->showId,
                                     'label' => $showDateTime->format('H:i'),
                                     'options' => ['class' => 'text-decoration-none']
-                                ], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
+                                ]) ?>
                             <?php else: ?>
                                 <?= $showDateTime->format('H:i') ?>
                             <?php endif; ?>
