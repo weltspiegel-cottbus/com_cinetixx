@@ -1,3 +1,11 @@
+## v0.7.7
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.6...v0.7.7)
+
+### 🩹 Fixes
+
+- Integrate the thumbnail preview loader into the component. ([0811405](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0811405))
+
 ## v0.7.6
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.5...v0.7.6)
